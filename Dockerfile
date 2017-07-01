@@ -18,12 +18,14 @@ RUN apt-get install -y \
       texlive-lang-cjk
 
 # Install style files
-RUN apt-get install -y curl bzip2 nkf \
+RUN apt-get install -y curl bzip2 nkf && \
     \
     mkdir -p "$TEXDIR/platex/jlisting" && \
     curl -L 'http://sourceforge.jp/frs/redir.php?m=jaist&f=%2Fmytexpert%2F26068%2Fjlisting.sty.bz2' | bunzip2 | nkf --utf8 > "$TEXDIR/platex/jlisting/jlisting.sty" && \
     mktexlsr && \
     \
-    apt-get purge -y curl bzip2 nkf \
+    apt-get purge -y curl bzip2 nkf && \
     apt-get autoremove -y && \
     apt-get autoclean
+
+ENTRYPOINT [ "lualatex" ]
