@@ -28,4 +28,4 @@ RUN apt-get install -y curl bzip2 nkf && \
     apt-get autoremove -y && \
     apt-get autoclean
 
-ENTRYPOINT [ "lualatex" ]
+RUN apt-get install -y pandoc
